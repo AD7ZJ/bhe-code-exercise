@@ -21,6 +21,11 @@ func NewSieve() Sieve {
 
 
 func (s *sieveImpl) NthPrime(n int64) int64 {
+	if n < 1000 {
+		s.RegularSieve(n+1)
+		return s.primes[n]
+	}
+	
 	s.SegmentedSieve(n*n)
 
     // Return the n'th prime number
