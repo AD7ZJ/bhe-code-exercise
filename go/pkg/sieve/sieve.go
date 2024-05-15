@@ -46,10 +46,10 @@ func (s *sieveImpl) EstimateLimitForNPrimes(n int64) int64 {
     // obviously we need more than n numbers to find n primes. 
     low := n
 
-    // it surely will be less than twice n to find n primes...
+    // it surely will be less than n squared to find n primes...
     high := n*n
 
-    // do a binary-ish search to converge on an estimate
+    // do a binary search to quickly converge on an estimate
     for low < high {
         try := (low + high) / 2
         
