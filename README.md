@@ -1,3 +1,17 @@
+# My implementation
+
+I chose to implement this in go to help familiarize myself with the language. After getting the regular sieve working, I then implemented a segmented sieve to reduce memory usage for large primes. The implementation is wholly contained inside go/pkg/sieve/sieve.go
+
+You can run the implementation from command line inside the go package, using the following: 
+
+`go run cmd/sieve_main.go <n>`
+
+Or alternatively, kick off the tests:
+
+`go test`
+
+---
+<sup>Original README.md<sup/>
 # BHE Software Engineer Coding Exercise
 
 ## The Sieve of Eratosthenes
