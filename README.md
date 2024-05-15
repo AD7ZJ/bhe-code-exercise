@@ -1,8 +1,13 @@
 # My implementation
 
-I chose to implement this in go to help familiarize myself with the language. After getting the regular sieve working, I then implemented a segmented sieve to reduce memory usage for large primes. The implementation is wholly contained inside go/pkg/sieve/sieve.go
+I chose to implement this in go to try and familiarize myself with the language (my background is embedded c programming). After getting the regular sieve working, I then implemented a segmented sieve to reduce memory usage for large primes. And lastly, I figured out a way to estimate the range needed to calculate primes over in order to come up with the n'th prime. 
 
-You can run the implementation from command line inside the go package, using the following: 
+Files of interest:
+- [sieve.go](go/pkg/sieve/sieve.go)
+- [sieve_test.go](go/pkg/sieve/sieve_test.go)
+- [sieve_main.go](go/pkg/sieve/cmd/sieve_main.go)
+
+You can run the implementation from command line inside the go package, using the following (I used this a lot for figuring out the implementation): 
 
 `go run cmd/sieve_main.go <n>`
 
