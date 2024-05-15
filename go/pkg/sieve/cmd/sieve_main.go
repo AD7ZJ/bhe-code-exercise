@@ -7,7 +7,7 @@ import (
 
 func main() {
 	sieve := sieve.NewSieve()
-	n := 100
+	n := 4
 
  	fmt.Printf("%dth prime number is %d\n", n, sieve.NthPrime(int64(n)))
 }

@@ -21,17 +21,44 @@ func NewSieve() Sieve {
 
 
 func (s *sieveImpl) NthPrime(n int64) int64 {
-	if n < 1000 {
-		s.RegularSieve(n+1)
-		return s.primes[n]
+	// the question is, how many numbers are enough to find n primes? 
+	limit := s.EstimateLimitForNPrimes(n)
+
+	fmt.Printf("Limit to find %dth prime is %d\n", n, limit)
+
+	// if we don't already have more than n primes cached, run the sieve
+	if int64(len(s.primes)) + int64(len(s.segmentedPrimes)) < n {
+		s.SegmentedSieve(limit)
 	}
-	
-	s.SegmentedSieve(n*n)
 
     // Return the n'th prime number
     return append(s.primes, s.segmentedPrimes...)[n]
 }
 
+func (s *sieveImpl) EstimateLimitForNPrimes(n int64) int64 {
+	// Prime number theorem: in n numbers, there are n/ln(n) primes. We need to solve for y=n/ln(n) for n iteratively...
+
+	// obviously we need more than n numbers to find n primes
+	low := n
+	// it surely will be less than twice n to find n primes...
+	high := n*n
+
+	// do a binary-ish search to converge on an estimate
+	for low < high {
+		try := (low + high) / 2
+		
+		estimatedPrimes := float64(try) / math.Log(float64(try))
+
+		if math.Abs(estimatedPrimes - float64(n)) < 1 {
+			return try
+		} else if estimatedPrimes < float64(n) {
+			low = try
+		} else {
+			high = try
+		}
+	}
+	return low
+}
 
 
 func (s *sieveImpl) RegularSieve(limit int64) {
